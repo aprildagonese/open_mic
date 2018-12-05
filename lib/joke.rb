@@ -1,4 +1,5 @@
 class Joke
+  attr_reader :id, :setup, :punchline 
 
   def initialize(id, setup, punchline)
     @id = id
@@ -6,4 +7,4 @@ class Joke
     @punchline = punchline
   end
 
-end 
+end
