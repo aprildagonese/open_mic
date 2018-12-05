@@ -7,6 +7,7 @@ class TestUser < MiniTest::Test
 
   def setup
     @sal = User.new("Sal")
+    @ali = User.new("Ali")
     @joke_1 = Joke.new(1, "Why did the strawberry cross the road?", "Because his mother was in a jam.")
     @joke_2 = Joke.new(2, "How do you keep a lion from charging?", "Take away its credit cards.")
   end
@@ -27,37 +28,23 @@ class TestUser < MiniTest::Test
     assert_equal [@joke_1, @joke_2], @sal.jokes
   end
 
+  def test_sal_tells_ali_jokes
+    assert_equal [@joke_1], @sal.tell(@ali, @joke_1)
+    assert_equal [@joke_1, @joke_2], @sal.tell(@ali, @joke_2)
+  end
+
+  def test_ali_learned_jokes_from_sal
+    @sal.tell(@ali, @joke_1)
+    assert_equal [@joke_1], @ali.jokes
+    @sal.tell(@ali, @joke_2)
+    assert_equal [@joke_1, @joke_2], @ali.jokes
+  end
+
+  def test_joke_by_id
+    @sal.tell(@ali, @joke_1)
+    @sal.tell(@ali, @joke_2)
+    assert_equal @joke_1, @ali.joke_by_id(1)
+    assert_equal @joke_2, @ali.joke_by_id(2)
+  end
+
 end
-
-
-
-pry(main)> require './lib/joke'
-# => true
-
-pry(main)> require './lib/user'
-# => true
-
-pry(main)> sal = User.new("Sal")
-# => #<User:0x00007fb71e1eb8d8...>
-
-pry(main)> ali = User.new("Ali")
-# => #<User:0x00007fb71e1a4348...>
-
-pry(main)> joke_1 = Joke.new(1, "Why did the strawberry cross the road?", "Because his mother was in a jam.")
-# => #<Joke:0x00007fb71da169f0...>
-
-pry(main)> joke_2 = Joke.new(2, "How do you keep a lion from charging?", "Take away its credit cards.")
-# => #<Joke:0x00007fb71d8e0bd0...>
-
-pry(main)> sal.tell(ali, joke_1)
-
-pry(main)> sal.tell(ali, joke_2)
-
-pry(main)> ali.jokes
-# => [#<Joke:0x00007fb71da169f0...>, #<Joke:0x00007fb71d8e0bd0...>]
-
-pry(main)> ali.joke_by_id(1)
-# => #<Joke:0x00007fb71da169f0...>
-
-pry(main)> ali.joke_by_id(2)
-# => #<Joke:0x00007fb71d8e0bd0...>
