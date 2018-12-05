@@ -13,7 +13,11 @@ class OpenMic
   end
 
   def repeated_jokes?
-    
-
+    p @performers
+    all_jokes = @performers.map do |performer|
+      performer.jokes
+    end
+    all_jokes.count != all_jokes.uniq.count #this isn't returning a unique array for some reason
+  end
 
 end

@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/joke'
 require './lib/user'
 require './lib/open_mic'
+require 'pry'
 
 class TestOpenMic < MiniTest::Test
 
@@ -34,6 +35,8 @@ class TestOpenMic < MiniTest::Test
     @ali.learn(@joke_1)
     @ali.learn(@joke_2)
     assert_equal false, @open_mic.repeated_jokes?
+    @ali.tell(@sal, @joke_1)
+    assert_equal true, @open_mic.repeated_jokes?
   end
 end
 
