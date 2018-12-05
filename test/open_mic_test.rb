@@ -39,13 +39,3 @@ class TestOpenMic < MiniTest::Test
     assert_equal true, @open_mic.repeated_jokes?
   end
 end
-
-
-#
-# pry(main)> open_mic.repeated_jokes?
-# # => false
-#
-# pry(main)> ali.tell(sal, joke_1)
-#
-# pry(main)> open_mic.repeated_jokes?
-# # => true
